@@ -2,10 +2,11 @@ var MovieDbService = require("./moviedb.service");
 
 class MovieService {
 
-    searchByKeyword = async(keywords, sortBy , language = "en", page = 1) =>{
+    searchByKeyword = async(keywords, sortBy = "popularity" , order = "desc", language = "en", page = 1) =>{
         const searchResult = await MovieDbService.searchByKeyword(keywords, language, page);
         const resultPage = searchResult.page;
         const totalResults = searchResult.total_results;
+        const totalPages = searchResult.total_pages
         const movieList = searchResult.results.map((movie) => {
             const container = {};
             container.id = movie.id? movie.id : "";
@@ -15,10 +16,11 @@ class MovieService {
             return container;
         })
 
-        if(sortBy){
-            movieList.sort(this.compareValues(sortBy));
+        //Sort Results if needed
+        if(sortBy !== "popularity" ||  order !== "desc"){
+            movieList.sort(this.compareValues(sortBy , order));
         }
-        return {movieList, resultPage, totalResults};
+        return {movieList, resultPage, totalPages, totalResults};
     }
 
     searchById = async(id, language= "en") => {
@@ -35,11 +37,27 @@ class MovieService {
         container.producers = searchResult.production_companies.map((production_company)=> { 
             return production_company.name? production_company.name : "";
         });
+        container.videos = searchResult.videos.results.map((video) => {
+          if(video.site && video.site.toLowerCase() === "youtube"){
+            return {
+              name : video.name,
+              site: video.site,
+              type: video.type,
+              url : `https://youtube.com/watch?v=${video.key}`
+            }
+          }
+
+        });
         container.runtime = searchResult.runtime? searchResult.runtime : "";
  
         // return searchResult;
         return container;
     }
+
+    
+
+
+
 
 
     compareValues = (key, order = 'asc') => {

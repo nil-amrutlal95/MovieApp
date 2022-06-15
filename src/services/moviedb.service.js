@@ -13,11 +13,15 @@ class MovieDbService {
 
     static searchById = async(id, language) => {
         const res = await axios
-            .get(`${this.baseUrl}/movie/${id}?api_key=${process.env.API_KEY}&language=${language}`);
+            .get(`${this.baseUrl}/movie/${id}?api_key=${process.env.API_KEY}&language=${language}&&append_to_response=videos`);
         return res.data;
     }
 
-    static 
+    static getVideoById = async(id, language) => {
+        const res = await axios
+            .get(`${this.baseUrl}/movie/${id}/videos?api_key=${process.env.API_KEY}&language=${language}`);
+        return res.data;
+    }
 
 }
 
