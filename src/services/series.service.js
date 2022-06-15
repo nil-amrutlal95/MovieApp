@@ -1,7 +1,7 @@
 const MovieDbService = require("./moviedb.service");
 const CommonService = require("./common.service");
 
-class MovieService {
+class SeriesService {
 
     searchByKeyword = async(keywords, sortBy = "popularity" , order = "desc", language = "en", page = 1) =>{
         const searchResult = await MovieDbService.searchByKeyword(keywords, language, page);
@@ -56,4 +56,4 @@ class MovieService {
 
 }
 
-module.exports = MovieService;
+module.exports = SeriesService;

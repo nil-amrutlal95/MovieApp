@@ -7,7 +7,8 @@ const dotenv = require('dotenv');
 const path = require('path');
 const swaggerUI = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
-var movieRoutes = require('./routes/movies.route');
+const moviesRoutes = require('./routes/movies.route');
+const seriesRoutes = require('./routes/series.route');
 
 
 dotenv.config();
@@ -70,7 +71,8 @@ const specs = swaggerJSDoc(swaggerOptions);
 
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
 
-app.use('/movies', movieRoutes);
+app.use('/movies', moviesRoutes);
+app.use('/series', seriesRoutes);
 
 /** Error handling */
 app.use((req, res, next) => {
