@@ -11,11 +11,13 @@ class MovieDbService {
     }
 
 
-    static searchById = async(id) => {
+    static searchById = async(id, language) => {
         const res = await axios
-            .get(`${this.baseUrl}/movie/${id}?api_key=${process.env.API_KEY}&query=${keywords}&language`);
+            .get(`${this.baseUrl}/movie/${id}?api_key=${process.env.API_KEY}&language=${language}`);
         return res.data;
     }
+
+    static 
 
 }
 
