@@ -29,6 +29,8 @@
   },
   "devDependencies": {
     "eslint": "^8.17.0",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "swagger-jsdoc": "^6.2.1",
+    "swagger-ui-express": "^4.4.0"
   }
 }
