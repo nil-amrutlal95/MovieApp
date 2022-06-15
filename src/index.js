@@ -5,7 +5,10 @@ const cors = require('cors');
 const http = require('http');
 const dotenv = require('dotenv');
 const path = require('path');
+const swaggerUI = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
 var movieRoutes = require('./routes/movies.route');
+
 
 dotenv.config();
 dotenv.config({ path: path.join(__dirname, 'config/.env') });
@@ -43,6 +46,30 @@ app.use((req, res, next) => {
     next();
 });
 
+
+
+/** Swagger Documentation */
+const swaggerOptions = {
+    definition : {
+        openapi : "",
+        info : {
+            title: "Movie App",
+            version: "1.0.0",
+            description: "An API to get data about your favourite movies and series"
+        },
+        servers : [
+            {
+                url: "http://localhost:6000"
+            }
+        ]
+    },
+    apis : ["./routes/*.js"]
+}
+
+const specs = swaggerJSDoc(swaggerOptions);
+
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+
 app.use('/movies', movieRoutes);
 
 /** Error handling */
@@ -52,6 +79,7 @@ app.use((req, res, next) => {
         message: error.message,
     });
 });
+
 
 
 
