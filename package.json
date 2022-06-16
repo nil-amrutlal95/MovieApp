@@ -1,37 +1,39 @@
 {
-  "name": "movieapp",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js",
-    "lint": "eslint --fix src",
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nil-amrutlal/MovieApp.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nil-amrutlal/MovieApp/issues"
-  },
-  "homepage": "https://github.com/nil-amrutlal/MovieApp#readme",
-  "dependencies": {
-    "axios": "^0.27.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.1",
-    "express": "^4.18.1",
-    "helmet": "^5.1.0",
-    "morgan": "^1.10.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.17.0",
-    "jest": "^28.1.1",
-    "nodemon": "^2.0.16",
-    "swagger-jsdoc": "^6.2.1",
-    "swagger-ui-express": "^4.4.0"
-  }
+    "name": "movieapp",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node src/index.js",
+        "dev": "nodemon src/index.js",
+        "format:write": "prettier --write .",
+        "lint": "eslint --fix src",
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/nil-amrutlal/MovieApp.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/nil-amrutlal/MovieApp/issues"
+    },
+    "homepage": "https://github.com/nil-amrutlal/MovieApp#readme",
+    "dependencies": {
+        "axios": "^0.27.2",
+        "cors": "^2.8.5",
+        "dotenv": "^16.0.1",
+        "express": "^4.18.1",
+        "helmet": "^5.1.0",
+        "morgan": "^1.10.0"
+    },
+    "devDependencies": {
+        "eslint": "^8.17.0",
+        "jest": "^28.1.1",
+        "nodemon": "^2.0.16",
+        "prettier": "^2.7.1",
+        "swagger-jsdoc": "^6.2.1",
+        "swagger-ui-express": "^4.4.0"
+    }
 }
