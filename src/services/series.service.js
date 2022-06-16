@@ -3,15 +3,17 @@ const CommonService = require("./common.service");
 
 class SeriesService {
 
+    genresDictionary = new Object();
+
     searchByKeyword = async(keywords, sortBy = "popularity" , order = "desc", language = "en", page = 1) =>{
-        const searchResult = await MovieDbService.searchByKeyword(keywords, language, page);
+        const searchResult = await MovieDbService.searchSeriesByKeyword(keywords, language, page);
         const resultPage = searchResult.page;
         const totalResults = searchResult.total_results;
         const totalPages = searchResult.total_pages
-        const movieList = searchResult.results.map((movie) => {
+        const seriesList = searchResult.results.map((movie) => {
             const container = {};
             container.id = movie.id? movie.id : "";
-            container.title = movie.title? movie.title : "";
+            container.title = movie.name? movie.name : "";
             container.overview = movie.overview? movie.overview : "";
             container.popularity = movie.popularity? movie.popularity : "";
             return container;
@@ -19,15 +21,15 @@ class SeriesService {
 
         //Sort Results if needed
         if(sortBy !== "popularity" ||  order !== "desc"){
-            movieList.sort(CommonService.compareValues(sortBy , order));
+            seriesList.sort(CommonService.compareValues(sortBy , order));
         }
-        return {movieList, resultPage, totalPages, totalResults};
+        return {seriesList, resultPage, totalPages, totalResults};
     }
 
     searchById = async(id, language= "en") => {
-        const searchResult = await MovieDbService.searchById(id, language);
+        const searchResult = await MovieDbService.searchSeriesById(id, language);
         const container = {};
-        container.title = searchResult.title ? searchResult.title : "";
+        container.title = searchResult.name ? searchResult.name : "";
         container.overview = searchResult.overview? searchResult.overview : ""
         container.genres = searchResult.genres.map((genre) => {
             return genre.name? genre.name : "";
@@ -49,8 +51,21 @@ class SeriesService {
           }
 
         });
-        container.runtime = searchResult.runtime? searchResult.runtime : "";
+        container.episodes = searchResult.number_of_episodes? searchResult.number_of_episodes : "";
+        container.seasons = searchResult.number_of_seasons? searchResult.number_of_seasons : "";
+        container.test = searchResult.asakas;
  
+        return container;
+    }
+
+    searchSeriesGenres = async function(language = "en"){
+        const searchResult = await MovieDbService.searchSeriesGenres(language);
+        const container = {};
+        container.genres = searchResult.genres.map((genre) => {
+            // this.genresDictionary.push({name : genre.name, id: genre.id});
+            this.genresDictionary[genre.name] = genre.id;
+            return genre.name;
+        })
         return container;
     }
 

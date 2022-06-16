@@ -4,7 +4,7 @@ class SeriesController {
 
     static seriesService = new SeriesService();
 
-    static searchMovieByKeyword = async (req, res) => {
+    static searchSeriesByKeyword = async (req, res) => {
 
         if(req.params.search === undefined){
             res.status(400).send({  status: 400, error: true, message: "Missing Inputs"})
@@ -27,7 +27,7 @@ class SeriesController {
     }
 
 
-    static searchMovieById = async (req, res) => {
+    static searchSeriesById = async (req, res) => {
         
         if(req.params.id === null || !Number(req.params.id)?true:false) {
             res.status(400).send({error: true, message: "Incorrect ID format"});
@@ -35,6 +35,16 @@ class SeriesController {
 
         const data = await this.seriesService.searchById(req.params.id, req.query.lang);
         return res.status(200).send(data);
+    }
+
+    static searchSeriesGenres = async (req, res) => {
+        await this.seriesService.searchSeriesGenres(req.query.lang)
+            .then((data) => {
+                return res.status(200).send({status: 200, error: false, data});
+            })
+            .catch((err) => {
+                return res.status(500).send({status: 500, error: true, message: err.message});
+            })
     }
 
 }

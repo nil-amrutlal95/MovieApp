@@ -1,9 +1,13 @@
-var express = require('express');
-var SeriesController = require("../controllers/series.controller");
-var router = express.Router();
+const express = require('express');
+const SeriesController = require("../controllers/series.controller");
+const router = express.Router();
 
-router.get('/search/:search', SeriesController.searchMovieByKeyword);
 
-router.get('/id/:id', SeriesController.searchMovieById)
+
+router.get('/search/:search', SeriesController.searchSeriesByKeyword);
+
+router.get('/id/:id', SeriesController.searchSeriesById);
+
+router.get('/genres' , SeriesController.searchSeriesGenres);
 
 module.exports = router;

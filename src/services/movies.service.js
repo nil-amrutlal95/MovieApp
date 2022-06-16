@@ -4,10 +4,10 @@ const CommonService = require("./common.service");
 class MovieService {
 
     searchByKeyword = async(keywords, sortBy = "popularity" , order = "desc", language = "en", page = 1) =>{
-        const searchResult = await MovieDbService.searchByKeyword(keywords, language, page);
-        const resultPage = searchResult.page;
-        const totalResults = searchResult.total_results;
-        const totalPages = searchResult.total_pages
+        const searchResult = await MovieDbService.searchMovieByKeyword(keywords, language, page);
+        const resultPage = searchResult.page? searchResult.page : page;
+        const totalResults = searchResult.total_results? searchResult.total_results : "";
+        const totalPages = searchResult.total_pages? searchResult.total_pages : page ;
         const movieList = searchResult.results.map((movie) => {
             const container = {};
             container.id = movie.id? movie.id : "";
@@ -25,7 +25,7 @@ class MovieService {
     }
 
     searchById = async(id, language= "en") => {
-        const searchResult = await MovieDbService.searchById(id, language);
+        const searchResult = await MovieDbService.searchMovieById(id, language);
         const container = {};
         container.title = searchResult.title ? searchResult.title : "";
         container.overview = searchResult.overview? searchResult.overview : ""
@@ -51,6 +51,15 @@ class MovieService {
         });
         container.runtime = searchResult.runtime? searchResult.runtime : "";
  
+        return container;
+    }
+
+    searchMovieGenres = async function(language = "en"){
+        const searchResult = await MovieDbService.searchMovieGenres(language);
+        const container = {};
+        container.genres = searchResult.genres.map((genre) => {
+            return genre.name;
+        })
         return container;
     }
 
