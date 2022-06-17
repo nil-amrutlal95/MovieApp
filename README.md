@@ -35,7 +35,7 @@ The API runs on http://localhost:6060
     lang: Language in which data will be displyed (default value is en)
     page: Results page returned (default value is 1)
 
-    
+### Functionality & Examples
     Functionality : Search movie/series by keyword(s)
     Example Movie Endpoint: http://localhost:6600/movies/search/jaws?page=3&sortBy=title&order=desc&lang=pt
     Example Movie Endpoing: http://localhost:6600/series/search/Breaking
@@ -54,7 +54,7 @@ The API runs on http://localhost:6060
 ### Optional Query Parameters
     lang: Language in which data will be displyed (default value is en)
     
-    
+### Functionality & Examples   
     Functionality: Search movies/series by ID
     Example Movie Endpoint: http://localhost:6600/movies/id/11?lang=pt
     Example Series Endpoint: http://localhost:6600/series/id/1396
@@ -71,7 +71,7 @@ The API runs on http://localhost:6060
 ### Optional Query Parameters
     lang: Language in which data will be displyed (default value is en)
     
-    
+### Functionality & Examples
     Functionality: Search movies's or series' genres
     Example Movie Endpoint: http://localhost:6600/movies/genres
     Example Series Endpoint: http://localhost:6600/movies/genres
