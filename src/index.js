@@ -66,6 +66,7 @@ app.use('/series', seriesRoutes);
 app.use((req, res, next) => {
     const error = new Error('Not Found');
     return res.status(404).json({
+        status : 404,
         message: error.message,
     });
 });
